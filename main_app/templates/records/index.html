@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Record List</h1>
+
+
+{%  for record in records %}
+<div class="card">
+    <!-- add this single line below -->
+    <a href="/records/{{ record.id }}">
+        <div class="card-content">
+        <span class="card-title">{{ record.title }}</span>
+        <p>Artist: {{ record.artist }}</p>
+        <p>Year: {{ record.year }}</p>
+
+    </div>
+    <!-- and this following one as well -->
+    </a>
+  </div>
+
+
+{% endfor %}
+
+{% endblock %}
+
+
+
+
+
