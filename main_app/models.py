@@ -1,6 +1,28 @@
 from django.db import models
+from django.urls import reverse
+from datetime import date
+
+SEGMENTS = (
+    ('B', 'Beginning'), 
+    ('M', 'Middle'), 
+    ('E', 'End')
+)
 
 # Create your models here.
+
+class Genre(models.Model):
+    genre = models.CharField(max_length=50)
+
+
+    def __str__(self):
+        return self.genre
+
+    def get_absolute_url(self):
+        return reverse('genre_detail', kwargs={'pk': self.id})
+
+  #------------------------------------------------------------------      
+
+
 
 class Record(models.Model):
     title = models.CharField(max_length=100)
@@ -8,17 +30,48 @@ class Record(models.Model):
     label = models.CharField(max_length=100)
     year = models.IntegerField()
     description = models.TextField(max_length=250)
-
-    
-#tostring 'dunder' method, lets you print specifically what we see in the terminal 
-# when we print out cat    
+    genre = models.ManyToManyField(Genre) #creates join table 
+   
     def __str__(self):
         return self.title
 
-# records = [
-#     Record('Parallel Lines', 'Blondie', 'Chrysalis', 1978), 
-#     Record('The Well-Tempered Clavier Book I & II: J.S.Bach', 'Svyatoslav Richter', 'Melodiya', 1971), 
-#     Record('Love To Love You Baby', 'Donna Summer', 'Casablanca', 1975), 
-#     Record('Rebel Yell', 'Billy Idol', 'Chrysalis', 1983),
-#     Record('Madonna', 'Madonna', 'Sire', 1983)
-# ]
+    def get_absolute_url(self):
+        return reverse('detail', kwargs={'record_id': self.id})
+
+    def played_today(self):
+        return self.airplay_set.count() >= 1
+
+
+        # return self.airplay_set.filter(date=date.today()).count() >= 1
+
+#----------------------------------------------------    
+
+class AirPlay(models.Model):
+    date = models.DateField('airplay date')
+    segment = models.CharField(
+        max_length=1, 
+        choices=SEGMENTS, 
+        default=SEGMENTS[0][0]
+    )
+
+    record = models.ForeignKey(Record, on_delete=models.CASCADE)
+
+    
+
+    def __str__(self):
+        # Nice method for obtaining the friendly value of a Field.choice
+        return f"{self.get_segment_display()} on {self.date}"
+
+ # change the default sort
+    class Meta:
+      ordering = ['-date']
+
+
+#---------------------------------------------------------------------------------------------
+
+
+
+
+
+
+

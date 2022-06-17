@@ -1,8 +1,9 @@
 from django.http import HttpResponse 
-from django.shortcuts import render
-from .models import Record
+from django.shortcuts import render, redirect 
+from .models import Record, Genre
 from django.http import HttpResponse
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from .forms import AirPlayForm
 
 
 
@@ -21,7 +22,7 @@ def about(request):
 
 #define the home view
 def home(request):
-    return HttpResponse('<h1>Hello /ᐠ｡‸｡ᐟ\ﾉ</h1>') #django equiv of res.send 
+    return render(request, 'home.html')
 
    
 
@@ -75,7 +76,11 @@ def records_index(request):
 
 def records_detail(request, record_id):
   record = Record.objects.get(id=record_id)
-  return render(request, 'records/detail.html', { 'record': record })
+  airplay_form= AirPlayForm()
+  return render(request, 'records/detail.html', { 
+    'record': record, 'airplay_form': airplay_form,
+})
+
 
 def new_record(request): 
   return render(request, 'records/new_record_form.html')
@@ -94,6 +99,33 @@ class RecordUpdate(UpdateView):
   model = Record
   success_url = '/records/'
   fields = '__all__'
+
+# add_airplay
+
+def add_airplay(request, record_id):
+  #create the ModelForm using the data in request.POST
+  form = AirPlayForm(request.POST)
+  #validate the form
+  if form.is_valid():
+    #don't save form to db until it has the cat_id assigned 
+    new_airplay = form.save(commit=False)
+    new_airplay.record_id = record_id 
+    new_airplay.save()
+  return redirect('detail', record_id=record_id)
+
+
+# def add_feeding(request, cat_id):
+# 	# create the ModelForm using the data in request.POST
+#   form = FeedingForm(request.POST)
+#   # validate the form
+#   if form.is_valid():
+#     # don't save the form to the db until it
+#     # has the cat_id assigned
+#     new_feeding = form.save(commit=False)
+#     new_feeding.cat_id = cat_id
+#     new_feeding.save()
+#   return redirect('detail', cat_id=cat_id)
+
 
 
 
