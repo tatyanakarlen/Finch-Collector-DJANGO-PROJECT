@@ -1,8 +1,7 @@
-from django.http import HttpResponse 
 from django.shortcuts import render, redirect 
 from .models import Record, Genre
-from django.http import HttpResponse
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.views.generic import ListView, DetailView
 from .forms import AirPlayForm
 
 
@@ -63,24 +62,9 @@ def home(request):
 
 def records_index(request):
     records = Record.objects.all()
-    print('records from database', records)
     return render(request, 
                   'records/index.html', 
                   {'records': records})
-    
-# def show(request, record_id):
-#         print('incoming wildcard value is' , record_id)
-#         #hey database, please get me the record with id=2
-#         record = Record.objects.get(id=record_id)
-#         return render(request, 'records/detail.html', {'record': record})
-
-def records_detail(request, record_id):
-  record = Record.objects.get(id=record_id)
-  airplay_form= AirPlayForm()
-  return render(request, 'records/detail.html', { 
-    'record': record, 'airplay_form': airplay_form,
-})
-
 
 def new_record(request): 
   return render(request, 'records/new_record_form.html')
@@ -99,6 +83,23 @@ class RecordUpdate(UpdateView):
   model = Record
   success_url = '/records/'
   fields = '__all__'
+    
+# def show(request, record_id):
+#         print('incoming wildcard value is' , record_id)
+#         #hey database, please get me the record with id=2
+#         record = Record.objects.get(id=record_id)
+#         return render(request, 'records/detail.html', {'record': record})
+
+def records_detail(request, record_id):
+  record = Record.objects.get(id=record_id)
+  genres = Genre.objects.all()
+  airplay_form= AirPlayForm()
+  return render(request, 'records/detail.html', { 
+    'record': record, 'airplay_form': airplay_form, 'genres': genres,
+})
+
+
+
 
 # add_airplay
 
@@ -126,6 +127,28 @@ def add_airplay(request, record_id):
 #     new_feeding.save()
 #   return redirect('detail', cat_id=cat_id)
 
+def assoc_genre(request, record_id, genre_id):
+  r = Record.objects.get(id=record_id)
+  r.genres.add(genre_id)
+  return redirect('detail', record_id=record_id)
+
+class GenreList(ListView):
+  model = Genre
+
+class GenreDetail(DetailView):
+  model = Genre
+
+class GenreCreate(CreateView):
+  model = Genre
+  fields = ['genre']
+
+class GenreUpdate(UpdateView):
+  model = Genre
+  fields = ['genre']
+
+class GenreDelete(DeleteView):
+  model = Genre
+  success_url = '/genres/'
 
 
 

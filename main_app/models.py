@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from datetime import date
+from django.contrib.auth.models import User
 
 SEGMENTS = (
     ('B', 'Beginning'), 
@@ -18,7 +19,7 @@ class Genre(models.Model):
         return self.genre
 
     def get_absolute_url(self):
-        return reverse('genre_detail', kwargs={'pk': self.id})
+        return reverse('genres_detail', kwargs={'pk': self.id})
 
   #------------------------------------------------------------------      
 
@@ -30,7 +31,8 @@ class Record(models.Model):
     label = models.CharField(max_length=100)
     year = models.IntegerField()
     description = models.TextField(max_length=250)
-    genre = models.ManyToManyField(Genre) #creates join table 
+    genres = models.ManyToManyField(Genre) #creates join table 
+    user = models.ForeignKey(User, on_delete=models.CASCADE) #1 user has many posts
    
     def __str__(self):
         return self.title
