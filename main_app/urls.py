@@ -21,7 +21,7 @@ urlpatterns = [
     path('genres/<int:pk>/delete/', views.GenreDelete.as_view(), name='genres_delete'),
     path('records/<int:record_id>/assoc_genre/<int:genre_id>/', views.assoc_genre, name='assoc_genre'), 
     path('accounts/signup/', views.signup, name='signup'),
-#     path('posts/<int:post_id>/comments/', views.comments_create, name='comments_create'), 
+    path('posts/<int:record_id>/reviews/', views.add_review, name='add_review'), 
 #   path('posts/<int:post_id>/comments/delete/<int:comment_id>', views.comments_delete, name='comments_delete'),
 ]
 
