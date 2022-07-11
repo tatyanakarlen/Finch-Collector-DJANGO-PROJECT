@@ -128,6 +128,26 @@ class GenreDelete(DeleteView):
   success_url = '/genres/'
 
 
+# @login_required
+# def comments_create(request, post_id):
+
+#   Comments.objects.create(
+#     content = request.POST['content'],
+#     post = Postcreated.objects.get(id = post_id),
+#     user = User.objects.get(id = request.user.id)
+#   )
+
+#   return redirect(f'/posts/{post_id}/')
+
+
+# @login_required
+# def comments_delete(request, comment_id, post_id):
+#   post = Postcreated.objects.get(id = post_id),
+#   Comments.objects.get(id=comment_id).delete()
+#   return redirect(f'/posts/{post_id}/')
+
+
+
 
 
 

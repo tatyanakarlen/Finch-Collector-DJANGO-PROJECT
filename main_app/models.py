@@ -24,7 +24,6 @@ class Genre(models.Model):
   #------------------------------------------------------------------      
 
 
-
 class Record(models.Model):
     title = models.CharField(max_length=100)
     artist = models.CharField(max_length=100)
@@ -42,6 +41,15 @@ class Record(models.Model):
 
     def played_today(self):
         return self.airplay_set.count() >= 1
+
+
+class Review(models.Model):
+  content = models.TextField(max_length=250)
+  record = models.ForeignKey(Record, on_delete=models.CASCADE)
+  user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+def __str__(self):
+        return self.title
 
 
         # return self.airplay_set.filter(date=date.today()).count() >= 1

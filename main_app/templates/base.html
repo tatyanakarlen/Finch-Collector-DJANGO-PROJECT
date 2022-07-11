@@ -22,10 +22,10 @@
         <ul class="right">
                     <li><a href="{% url 'home' %}">Browse Records</a></li>
                     {% if user.is_authenticated %}
+                    <li><a href="{% url 'index' %}">My Records</a></li>
+                    <li><a href="{% url 'record_create' %}">Add Record</a></li>
                     <li><a href="{% url 'genres_create' %}">Add Genre</a></li>
                     <li><a href="{% url 'genres_index' %}">View Genres</a></li>
-                    <li><a href="{% url 'record_create' %}">Add Record</a></li>
-                    <li><a href="{% url 'index' %}">My Records</a></li>
                     <li><a href="{% url 'logout' %}">Log Out</a></li>
                     {% else %}
                     <li><a href="{% url 'login' %}">Log In</a></li>
