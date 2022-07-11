@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect 
-from .models import Record, Genre
+from .models import Record, Genre, Review, User
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic import ListView, DetailView
-from .forms import AirPlayForm
+from .forms import AirPlayForm, ReviewForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
@@ -77,13 +77,14 @@ def records_detail(request, record_id):
   record = Record.objects.get(id=record_id)
   genres = Genre.objects.all()
   airplay_form= AirPlayForm()
+  review_form = ReviewForm()
   if record.user.id == request.user.id: 
     return render(request, 'records/detail.html', { 
-    'record': record, 'airplay_form': airplay_form, 'genres': genres,
+    'record': record, 'airplay_form': airplay_form, 'review_form': review_form, 'genres': genres,
 })
   else: 
     return render(request, 'records/public-detail.html', { 
-    'record': record, 'genres': genres,
+    'record': record, 'review_form': review_form, 'genres': genres,
 })
 
 
@@ -126,6 +127,19 @@ class GenreUpdate(UpdateView):
 class GenreDelete(DeleteView):
   model = Genre
   success_url = '/genres/'
+
+
+
+@login_required
+def add_review(request, record_id):
+
+   Review.objects.create(
+    content = request.POST['content'],
+    record = Record.objects.get(id = record_id),
+    user = User.objects.get(id = request.user.id)
+  )
+
+   return redirect('detail', record_id=record_id)
 
 
 # @login_required

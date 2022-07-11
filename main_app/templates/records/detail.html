@@ -52,9 +52,20 @@
   </table>
 </div>
 </div>
-
-
 <hr>
+
+<section class="comment-submission">
+  <!-- <h4>Comments:</h4> -->
+  <form method="POST" action="{% url 'review_create' %}">
+    {% csrf_token %}
+    <label for="comment">Add Review:</label><br>
+    <input type="text" name="content"></input>
+    <button class= "small-btn pink" type="submit">Submit</button>
+   </form>
+</section>
+
+
+
 <div class="row">
   <div class="col s6">
     <h3>Genres</h3>
