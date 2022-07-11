@@ -21,10 +21,15 @@
         </ul>
         <ul class="right">
                     <li><a href="{% url 'about' %}">About</a></li>
-                    <li><a href="{% url 'genres_create' %}">Add a Genre</a></li>
-                    <li><a href="{% url 'genres_index' %}">View All Genres</a></li>
-                    <li><a href="{% url 'record_create' %}">Add a Record</a></li>
-                    <li><a href="{% url 'index' %}">View All Records</a></li>
+                    <li><a href="{% url 'index' %}">Browse Records</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'genres_create' %}">Add Genre</a></li>
+                    <li><a href="{% url 'genres_index' %}">View Genres</a></li>
+                    <li><a href="{% url 'record_create' %}">Add Record</a></li>
+                    <li><a href="{% url 'index' %}">Browse Records</a></li>
+                    {% else %}
+                    <li><a href="{% url 'login' %}">Log In</a></li>
+                    {% endif %}
         </ul>
       </div>
     </nav>
