@@ -23,12 +23,19 @@
 
 <section class="review-submission">
     <form action="{% url 'add_review' record.id %}" method="post">
-        <label>Add Review</label>
         {% csrf_token %}
         {{ review_form.as_p }}
         <input type="submit" class="btn" value="Add Review">
       </form>
   </section>
+
+  <div class="user-comment-group">
+    {% for review in reviews %}
+    <div class="user-comment-id">
+        <h6>{{ review.user}}</h6>
+        <p>{{review.review}}</p>
+    {% endfor %}
+      </div>
 
 
 <hr>
