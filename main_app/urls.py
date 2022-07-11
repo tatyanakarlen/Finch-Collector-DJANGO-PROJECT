@@ -19,7 +19,8 @@ urlpatterns = [
     path('genres/create/', views.GenreCreate.as_view(), name='genres_create'), 
     path('genres/<int:pk>/update/', views.GenreUpdate.as_view(), name='genres_update'),
     path('genres/<int:pk>/delete/', views.GenreDelete.as_view(), name='genres_delete'),
-    path('records/<int:record_id>/assoc_genre/<int:genre_id>/', views.assoc_genre, name='assoc_genre')
+    path('records/<int:record_id>/assoc_genre/<int:genre_id>/', views.assoc_genre, name='assoc_genre'), 
+    path('accounts/signup/', views.signup, name='signup'),
 ]
 
 
