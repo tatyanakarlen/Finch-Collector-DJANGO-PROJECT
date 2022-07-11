@@ -2,7 +2,7 @@
 {% block content %}
 
 <h1>Record Details</h1>
-
+<h3>Public Detail page</h3>
 
 <div class="row">
   <div class="col s6">
@@ -16,40 +16,8 @@
     <p>Description: {{ record.description }}</p>
   
   </div>
-  <div class="card-action">
-  <a href="{% url 'record_update' record.id %}">Edit</a>
-  <a href="{% url 'record_delete' record.id %}">Delete</a>
   
 </div>
-</div>
-</div>
-</div>
-
-<div class="col s6">
-  <form action="{% url 'add_airplay' record.id %}" method="post">
-    {% csrf_token %}
-    {{ airplay_form.as_p }}
-    <input type="submit" class="btn" value="Add Airplay Date">
-  </form>
-  <br>
-  {% if record.played_today %}
-    <div class="card-panel teal-text center-align">{{record.title}} is scheduled for airplay</div>
-  {% else %}
-    <div class="card-panel red-text center-align">{{record.title}} is not scheduled for airplay</div>
-  {% endif %}
-  <table class="striped">
-    <thead>
-      <tr><th>Date</th><th>Segment</th></tr>
-    </thead>
-    <tbody>
-      {% for airplay in record.airplay_set.all %}
-        <tr>
-          <td>{{airplay.date}}</td>
-          <td>{{airplay.get_segment_display}}</td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
 </div>
 </div>
 
@@ -74,7 +42,7 @@
   </div>
   <!-- Available genres will come after this line -->
   <div class="col s6">
-    <h3>Add Genres</h3>
+    <h3>Add Genre</h3>
     {% if genres.count %}
       {% for genre in genres %}
         <div class="card">
@@ -119,7 +87,3 @@
 
 
 {% endblock %}
-
-
-  
-  

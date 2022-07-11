@@ -70,15 +70,20 @@ class RecordDelete(DeleteView):
 class RecordUpdate(UpdateView):
   model = Record
   success_url = '/records/'
-  fields = '__all__'
+  fields = ['title', 'artist', 'label', 'year', 'description']
     
 
 def records_detail(request, record_id):
   record = Record.objects.get(id=record_id)
   genres = Genre.objects.all()
   airplay_form= AirPlayForm()
-  return render(request, 'records/detail.html', { 
+  if record.user.id == request.user.id: 
+    return render(request, 'records/detail.html', { 
     'record': record, 'airplay_form': airplay_form, 'genres': genres,
+})
+  else: 
+    return render(request, 'records/public-detail.html', { 
+    'record': record, 'genres': genres,
 })
 
 
