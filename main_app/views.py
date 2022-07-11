@@ -36,7 +36,10 @@ def about(request):
 
 
 def home(request):
-    return render(request, 'home.html')
+    records = Record.objects.all()
+    return render(request, 
+                  'home.html', 
+                  {'records': records})
 
 @login_required 
 def records_index(request):
@@ -50,7 +53,7 @@ def new_record(request):
 
 class RecordCreate(LoginRequiredMixin,CreateView):
   model = Record
-  fields = '__all__'
+  fields = ['title', 'artist', 'label', 'year', 'description']
   success_url = '/records/'
   def form_valid(self, form):
     # form.istance represents the cat
