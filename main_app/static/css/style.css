@@ -18,7 +18,12 @@ body {
     float: left;
 }
 
-nav, .pink {
-  background-color: rgb(58, 58, 58); 
-}
+/* .hero {
+  display: flex; 
+  justify-content: center;
+} */
+
+/* .hero h1 {
+  margin: auto; 
+} */
 
