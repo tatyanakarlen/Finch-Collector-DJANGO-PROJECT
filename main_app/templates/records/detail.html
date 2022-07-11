@@ -54,14 +54,13 @@
 </div>
 <hr>
 
-<section class="comment-submission">
-  <!-- <h4>Comments:</h4> -->
-  <form method="POST" action="{% url 'review_create' %}">
-    {% csrf_token %}
-    <label for="comment">Add Review:</label><br>
-    <input type="text" name="content"></input>
-    <button class= "small-btn pink" type="submit">Submit</button>
-   </form>
+<section class="review-submission">
+  <form action="{% url 'add_review' record.id %}" method="post">
+      <label>Add Review</label>
+      {% csrf_token %}
+      {{ review_form.as_p }}
+      <input type="submit" class="btn" value="Add Review">
+    </form>
 </section>
 
 
