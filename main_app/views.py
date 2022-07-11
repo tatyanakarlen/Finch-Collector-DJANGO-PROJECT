@@ -75,16 +75,17 @@ class RecordUpdate(UpdateView):
 
 def records_detail(request, record_id):
   record = Record.objects.get(id=record_id)
+  reviews = Review.objects.filter(record=record_id)
   genres = Genre.objects.all()
   airplay_form= AirPlayForm()
   review_form = ReviewForm()
   if record.user.id == request.user.id: 
     return render(request, 'records/detail.html', { 
-    'record': record, 'airplay_form': airplay_form, 'review_form': review_form, 'genres': genres,
+    'record': record, 'airplay_form': airplay_form, 'review_form': review_form, 'genres': genres, 'reviews': reviews
 })
   else: 
     return render(request, 'records/public-detail.html', { 
-    'record': record, 'review_form': review_form, 'genres': genres,
+    'record': record, 'review_form': review_form, 'genres': genres, 'reviews': reviews
 })
 
 
@@ -134,7 +135,7 @@ class GenreDelete(DeleteView):
 def add_review(request, record_id):
 
    Review.objects.create(
-    content = request.POST['content'],
+    review = request.POST['review'],
     record = Record.objects.get(id = record_id),
     user = User.objects.get(id = request.user.id)
   )

@@ -9,5 +9,5 @@ class AirPlayForm(ModelForm):
 class ReviewForm(ModelForm):
     class Meta: 
         model = Review
-        fields = ['content']
+        fields = ['review']
 
