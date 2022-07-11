@@ -5,6 +5,8 @@
 
 
 {%  for record in records %}
+<div class="row">
+<div class="col s12 m6">
 <div class="card">
     <!-- add this single line below -->
     <a href="/records/{{ record.id }}">
@@ -17,9 +19,12 @@
     <!-- and this following one as well -->
     </a>
   </div>
-
+  </div>
+  
+</div>
 
 {% endfor %}
+
 
 {% endblock %}
 

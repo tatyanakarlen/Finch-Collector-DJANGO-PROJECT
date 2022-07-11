@@ -12,3 +12,13 @@ body {
     padding-top: 0;
     text-align: right;
   }
+
+  .card {
+    width: 50%;
+    float: left;
+}
+
+nav, .pink {
+  background-color: rgb(58, 58, 58); 
+}
+
