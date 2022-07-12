@@ -11,3 +11,8 @@ class ReviewForm(ModelForm):
         model = Review
         fields = ['review']
 
+class ReviewEditForm(ModelForm):
+    class Meta: 
+        model = Review
+        fields = ['review']
+
