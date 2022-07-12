@@ -2,8 +2,11 @@
 {% block content %}
 
 <h1>Edit your review</h1>
+<p>{{ record.id }}</p>
+<p>{{ review.id }}</p>
 
-<form action="" method="post">
+<form action="{% url 'review_submit_edit' record.id review.id %}" method="post">
+  
     {% csrf_token %}
     {{ review_edit_form.as_p }}
     <input type="submit" class="btn" value="Edit Review">

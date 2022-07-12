@@ -21,10 +21,14 @@ urlpatterns = [
     path('genres/<int:pk>/delete/', views.GenreDelete.as_view(), name='genres_delete'),
     path('records/<int:record_id>/assoc_genre/<int:genre_id>/', views.assoc_genre, name='assoc_genre'), 
     path('accounts/signup/', views.signup, name='signup'),
-    path('posts/<int:record_id>/reviews/', views.add_review, name='add_review'), 
-    path('posts/<int:record_id>/reviews/delete/<int:review_id>', views.review_delete, name='review_delete'),
-    path('posts/<int:record_id>/reviews/edit/<int:review_id>', views.review_edit, name='review_edit'),
+    path('records/<int:record_id>/reviews/', views.add_review, name='add_review'), 
+    path('records/<int:record_id>/reviews/delete/<int:review_id>', views.review_delete, name='review_delete'),
+    path('records/<int:record_id>/reviews/edit/<int:review_id>', views.review_edit, name='review_edit'),
+    path('records/<int:record_id>/reviews/submit_update_form/<int:review_id>', views.review_submit_edit, name='review_submit_edit'),
+    
 ]
+
+
 
 
 
