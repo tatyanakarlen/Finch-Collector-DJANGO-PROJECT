@@ -44,7 +44,7 @@ class Record(models.Model):
 
 
 class Review(models.Model):
-  review = models.TextField(max_length=250)
+  review = models.TextField(max_length=1000)
   record = models.ForeignKey(Record, on_delete=models.CASCADE)
   user = models.ForeignKey(User, on_delete=models.CASCADE)
 #   created_at = models.DateTimeField(auto_now_add=True)
@@ -59,7 +59,7 @@ def __str__(self):
 #----------------------------------------------------    
 
 class AirPlay(models.Model):
-    date = models.DateField('airplay date')
+    date = models.DateField('Add airplay date')
     segment = models.CharField(
         max_length=1, 
         choices=SEGMENTS, 

@@ -9,7 +9,6 @@
     <div class="card">
   <div class="card-content">
     <span class="card-title">{{ record.title }}</span>
-    <p>Title: {{ record.title }}</p>
     <p>Artist: {{ record.artist }}</p>
     <p>Label: {{ record.label }}</p>
     <p>Year: {{ record.year }}</p>
@@ -30,10 +29,23 @@
   </section>
 
   <div class="user-comment-group">
+    <h5>User Reviews:</h5>
     {% for review in reviews %}
-    <div class="user-comment-id">
+      {% if review.user.id == request.user.id %} 
+      <div class="user-comment-id">
         <h6>{{ review.user}}</h6>
         <p>{{review.review}}</p>
+      </div>
+        <form method="POST" action="{% url 'review_delete' record.id review.id %}">
+            {% csrf_token %}
+            <button  id="comment-delete-btn" type="submit"><i class="material-icons">delete</i></button>
+           </form>
+      {% else %}
+       <div class="user-comment-id">
+        <h6>{{ review.user}}</h6>
+        <p>{{review.review}}</p>
+      {% endif %}
+
     {% endfor %}
       </div>
 

@@ -143,23 +143,14 @@ def add_review(request, record_id):
    return redirect('detail', record_id=record_id)
 
 
-# @login_required
-# def comments_create(request, post_id):
 
-#   Comments.objects.create(
-#     content = request.POST['content'],
-#     post = Postcreated.objects.get(id = post_id),
-#     user = User.objects.get(id = request.user.id)
-#   )
-
-#   return redirect(f'/posts/{post_id}/')
-
-
-# @login_required
-# def comments_delete(request, comment_id, post_id):
-#   post = Postcreated.objects.get(id = post_id),
-#   Comments.objects.get(id=comment_id).delete()
-#   return redirect(f'/posts/{post_id}/')
+@login_required
+def review_delete(request, review_id, record_id):
+  review = Review.objects.get(id = review_id)
+  if review.user.id == request.user.id: 
+    record = Record.objects.get(id = record_id),
+    Review.objects.get(id=record_id).delete()
+    return redirect('detail', record_id=record_id)
 
 
 

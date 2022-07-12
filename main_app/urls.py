@@ -22,27 +22,11 @@ urlpatterns = [
     path('records/<int:record_id>/assoc_genre/<int:genre_id>/', views.assoc_genre, name='assoc_genre'), 
     path('accounts/signup/', views.signup, name='signup'),
     path('posts/<int:record_id>/reviews/', views.add_review, name='add_review'), 
-#   path('posts/<int:post_id>/comments/delete/<int:comment_id>', views.comments_delete, name='comments_delete'),
+    path('posts/<int:record_id>/reviews/delete/<int:review_id>', views.review_delete, name='review_delete'),
 ]
 
 
-# path('toys/', views.ToyList.as_view(), name='toys_index'),
-#   path('toys/<int:pk>/', views.ToyDetail.as_view(), name='toys_detail'),
-#   path('toys/create/', views.ToyCreate.as_view(), name='toys_create'),
-#   path('toys/<int:pk>/update/', views.ToyUpdate.as_view(), name='toys_update'),
-#   path('toys/<int:pk>/delete/', views.ToyDelete.as_view(), name='toys_delete'),
-#   path('cats/<int:cat_id>/assoc_toy/<int:toy_id>/', views.assoc_toy, name='assoc_toy'),
-# ]
 
-
-
-
-
-
-#  
-#   path('toys/<int:pk>/update/', views.ToyUpdate.as_view(), name='toys_update'),
-#   path('toys/<int:pk>/delete/', views.ToyDelete.as_view(), name='toys_delete'),
-#   path('cats/<int:cat_id>/assoc_toy/<int:toy_id>/', views.assoc_toy, name='assoc_toy')
 
 
 
