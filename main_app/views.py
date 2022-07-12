@@ -149,7 +149,7 @@ def review_delete(request, review_id, record_id):
   review = Review.objects.get(id = review_id)
   if review.user.id == request.user.id: 
     record = Record.objects.get(id = record_id),
-    Review.objects.get(id=record_id).delete()
+    Review.objects.get(id=review_id).delete()
     return redirect('detail', record_id=record_id)
 
 @login_required
@@ -158,6 +158,17 @@ def review_edit(request, review_id, record_id ):
   return render(request, 
                   'records/editform.html', {'review_edit_form': review_edit_form}
   )
+
+  # cat.name = request.POST['name']
+
+
+@login_required
+def review_submit_edit(request, review_id, record_id):
+  if review.user.id == request.user.id: 
+    review = Review.objects.get(id = review_id)
+    review.review = request.POST['review']
+    review.save()
+    return redirect('detail', record_id=record_id)
 
 
 
