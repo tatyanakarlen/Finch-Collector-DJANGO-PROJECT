@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Record, Genre, Review, User
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic import ListView, DetailView
-from .forms import AirPlayForm, ReviewForm
+from .forms import AirPlayForm, ReviewForm, ReviewEditForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
@@ -151,6 +151,19 @@ def review_delete(request, review_id, record_id):
     record = Record.objects.get(id = record_id),
     Review.objects.get(id=record_id).delete()
     return redirect('detail', record_id=record_id)
+
+@login_required
+def review_edit(request, review_id, record_id ):
+  review_edit_form = ReviewEditForm()
+  return render(request, 
+                  'records/editform.html', {'review_edit_form': review_edit_form}
+  )
+
+
+
+  
+
+
 
 
 
