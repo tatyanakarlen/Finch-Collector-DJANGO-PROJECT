@@ -149,7 +149,7 @@ def review_delete(request, review_id, record_id):
   review = Review.objects.get(id = review_id)
   if review.user.id == request.user.id: 
     record = Record.objects.get(id = record_id),
-    Review.objects.get(id=record_id).delete()
+    Review.objects.get(record=record_id).delete()
     return redirect('detail', record_id=record_id)
 
 
