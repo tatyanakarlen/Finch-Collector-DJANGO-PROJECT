@@ -54,6 +54,17 @@ def __str__(self):
         return self.title
 
 
+class Track(models.Model):
+    title = models.CharField(max_length=100)
+    number = models.IntegerField()
+    record = models.ForeignKey(Record, on_delete=models.CASCADE)
+ 
+def __str__(self):
+        return self.title
+   
+
+
+
         # return self.airplay_set.filter(date=date.today()).count() >= 1
 
 #----------------------------------------------------    
