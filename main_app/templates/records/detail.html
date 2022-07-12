@@ -74,6 +74,7 @@
           {% csrf_token %}
           <button  id="comment-delete-btn" type="submit"><i class="material-icons">delete</i></button>
          </form>
+      <a href="{% url 'review_edit' record.id review.id %}">edit</a>
     {% else %}
      <div class="user-comment-id">
       <h6>{{ review.user}}</h6>

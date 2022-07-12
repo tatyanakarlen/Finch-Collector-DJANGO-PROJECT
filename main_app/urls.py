@@ -23,6 +23,7 @@ urlpatterns = [
     path('accounts/signup/', views.signup, name='signup'),
     path('posts/<int:record_id>/reviews/', views.add_review, name='add_review'), 
     path('posts/<int:record_id>/reviews/delete/<int:review_id>', views.review_delete, name='review_delete'),
+    path('posts/<int:record_id>/reviews/edit/<int:review_id>', views.review_edit, name='review_edit'),
 ]
 
 
