@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect 
-from .models import Record, Genre, Review, User
+from .models import Record, Genre, Review, User, Track
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic import ListView, DetailView
-from .forms import AirPlayForm, ReviewForm, ReviewEditForm
+from .forms import AirPlayForm, ReviewForm, ReviewEditForm, AddTrackForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
@@ -79,9 +79,11 @@ def records_detail(request, record_id):
   genres = Genre.objects.all()
   airplay_form= AirPlayForm()
   review_form = ReviewForm()
+  add_track_form = AddTrackForm()
   if record.user.id == request.user.id: 
     return render(request, 'records/detail.html', { 
-    'record': record, 'airplay_form': airplay_form, 'review_form': review_form, 'genres': genres, 'reviews': reviews
+    'record': record, 'airplay_form': airplay_form, 'review_form': review_form, 
+    'add_track_form': add_track_form, 'genres': genres, 'reviews': reviews
 })
   else: 
     return render(request, 'records/public-detail.html', { 
@@ -154,10 +156,6 @@ def review_delete(request, review_id, record_id):
 
 
 
-
-
-
-
 @login_required
 def review_edit(request, review_id, record_id ):
   review = Review.objects.get(id = review_id)
@@ -181,6 +179,20 @@ def review_submit_edit(request, review_id, record_id):
      review.review = request.POST['review']
      review.save()
      return redirect('detail', record_id=record_id)
+
+
+@login_required
+def add_track(request, record_id):
+
+   Track.objects.create(
+    title = request.POST['title'],
+    number = request.POST['number'],
+    record = Record.objects.get(id = record_id)
+  )
+
+   return redirect('detail', record_id=record_id)
+
+
 
 
 

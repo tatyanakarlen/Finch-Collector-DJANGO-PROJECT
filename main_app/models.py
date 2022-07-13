@@ -47,11 +47,22 @@ class Review(models.Model):
   review = models.TextField(max_length=1000)
   record = models.ForeignKey(Record, on_delete=models.CASCADE)
   user = models.ForeignKey(User, on_delete=models.CASCADE)
-#   created_at = models.DateTimeField(auto_now_add=True)
-#   updated_at = models.DateTimeField(auto_now=True)
+  created_at = models.DateTimeField(auto_now_add=True)
+  updated_at = models.DateTimeField(auto_now=True)
 
-def __str__(self):
+  def __str__(self):
         return self.title
+
+
+class Track(models.Model):
+    title = models.CharField(max_length=100)
+    number = models.IntegerField()
+    record = models.ForeignKey(Record, on_delete=models.CASCADE)
+ 
+    def __str__(self):
+        return self.title
+   
+
 
 
         # return self.airplay_set.filter(date=date.today()).count() >= 1

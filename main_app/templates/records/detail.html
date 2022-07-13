@@ -23,7 +23,22 @@
 </div>
 </div>
 </div>
+
 </div>
+
+<div class="row">
+<div class="col s6">
+  <div class="card">
+<div class="card-content">
+  <form action="{% url 'add_track' record.id %}" method="post">
+    {% csrf_token %}
+    {{ add_track_form.as_p }}
+    <input type="submit" class="btn" value="Add Track">
+  </form>
+</div>
+  </div>
+</div>
+ 
 
 
 <div class="col s6">
@@ -68,7 +83,7 @@
   {% for review in reviews %}
     {% if review.user.id == request.user.id %} 
     <div class="user-comment-id">
-      <h6>{{ review.user}}</h6>
+      <h6>{{ review.user}}<span>{{review.created_at}}</span></h6>
       <p>{{review.review}}</p>
     </div>
       <form method="POST" action="{% url 'review_delete' record.id review.id %}">
