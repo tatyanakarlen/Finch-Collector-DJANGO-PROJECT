@@ -15,7 +15,8 @@ urlpatterns = [
 
     
     path('genres/', views.GenreList.as_view(), name='genres_index'), 
-    path('genres/<int:pk>/', views.GenreDetail.as_view(), name='genres_detail'),
+    # path('genres/<int:pk>/', views.GenreDetail.as_view(), name='genres_detail'),
+    path('genres/<int:genre_id>/', views.genre_detail, name='genres_detail'),
     path('genres/create/', views.GenreCreate.as_view(), name='genres_create'), 
     path('genres/<int:pk>/update/', views.GenreUpdate.as_view(), name='genres_update'),
     path('genres/<int:pk>/delete/', views.GenreDelete.as_view(), name='genres_delete'),

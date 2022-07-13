@@ -120,6 +120,31 @@ class GenreList(ListView):
 
 class GenreDetail(DetailView):
   model = Genre
+  # records = Genre.objects.filter()
+  # a2 = Article.objects.filter(reporter__username='John')
+
+
+def genre_detail(request, genre_id):
+  genre = Genre.objects.get(id=genre_id)
+  print(genre_id)
+  records = Record.objects.filter(genres = genre_id)
+  print(records)
+  return render(request, 'main_app/genre_detail.html', {'genre': genre, 'records': records} )
+
+
+
+
+
+
+  # class SomeView(generic.TemplateView):
+  #   var1 = 0
+  #   var2 = 1 
+  #   template_name = 'some_template.html'
+
+  #   def get_context_data(self, **kwargs):
+  #       context = super(SomeView, self).get_context_data(**kwargs)
+  #       context.update({'var1': self.var1, 'var2': self.var2})
+  #       return context
 
 class GenreCreate(CreateView):
   model = Genre
