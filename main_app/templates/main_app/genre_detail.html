@@ -16,6 +16,7 @@
     </div>
     {% for record in records %}
     <a href="{% url 'detail' record.id %}">{{ record.title }} {{ record.artist }}</a>
+    <br>
     {% endfor %}
 
 

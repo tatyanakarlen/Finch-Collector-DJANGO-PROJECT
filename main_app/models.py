@@ -19,7 +19,7 @@ class Genre(models.Model):
         return self.genre
 
     def get_absolute_url(self):
-        return reverse('genres_detail', kwargs={'pk': self.id})
+        return reverse('genres_detail', kwargs={'genre_id': self.id})
 
   #------------------------------------------------------------------      
 

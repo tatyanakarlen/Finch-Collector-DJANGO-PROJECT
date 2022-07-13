@@ -109,7 +109,7 @@
       <a href="{% url 'review_edit' record.id review.id %}">edit</a>
     {% else %}
      <div class="user-comment-id">
-      <h6>{{ review.user}}</h6>
+      <h6>{{ review.user}}<span>{{review.created_at}}</span></h6>
       <p>{{review.review}}</p>
     {% endif %}
 
@@ -126,7 +126,8 @@
         <div class="card">
           <div class="card-content">
             <span class="card-title">
-              <span>{{ genre.genre }}</span>
+              <a href="{% url 'genres_detail' genre.id %}"> <span>{{ genre.genre }}</span></a>
+            
             </span>
           </div>
         </div>
@@ -143,7 +144,7 @@
         <div class="card">
           <div class="card-content">
             <span class="card-title">
-              <span>{{ genre.genre }}</span>
+              <a href="{% url 'genres_detail' genre.id %}"> <span>{{ genre.genre }}</span></a>
             </span>
           </div>
           <div class="card-action">
