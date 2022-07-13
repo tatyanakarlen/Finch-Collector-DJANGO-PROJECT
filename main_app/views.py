@@ -76,18 +76,20 @@ class RecordUpdate(UpdateView):
 def records_detail(request, record_id):
   record = Record.objects.get(id=record_id)
   reviews = Review.objects.filter(record=record_id)
+  tracks = Track.objects.filter(record=record_id)
   genres = Genre.objects.all()
   airplay_form= AirPlayForm()
   review_form = ReviewForm()
   add_track_form = AddTrackForm()
+  print(tracks)
   if record.user.id == request.user.id: 
     return render(request, 'records/detail.html', { 
     'record': record, 'airplay_form': airplay_form, 'review_form': review_form, 
-    'add_track_form': add_track_form, 'genres': genres, 'reviews': reviews
+    'add_track_form': add_track_form, 'genres': genres, 'reviews': reviews, 'tracks': tracks
 })
   else: 
     return render(request, 'records/public-detail.html', { 
-    'record': record, 'review_form': review_form, 'genres': genres, 'reviews': reviews
+    'record': record, 'review_form': review_form, 'genres': genres, 'reviews': reviews, 'tracks': tracks
 })
 
 
