@@ -4,6 +4,8 @@
 <h1>Record Details</h1>
 
 
+
+
 <div class="row">
   <div class="col s6">
     <div class="card">
@@ -22,6 +24,20 @@
   
 </div>
 </div>
+
+<div class="card">
+  <div class="card-content">
+    <span class="tracks">Tracks</span>
+    {% for track in tracks %}
+      <p><span>{{ track.number }}.</span>{{ track.title }}</p>
+    {% endfor %}
+  </div>
+</div>
+
+
+
+
+
 </div>
 
 </div>
