@@ -9,39 +9,117 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Boxman</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/nav.css' %}">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
 <body>
-  <header class="navbar-fixed">
-    <nav class="navbar-color #212121 grey darken-4">
-      <div class="nav-wrapper">
-        <ul>
+  <!-- <header class="navbar-fixed">
+    <nav class="navbar-color #212121 grey darken-4"> -->
+      <div class="topnav" id="myTopnav">
+        <!-- <ul>
           <li><a href="/" class="left brand-logo">&nbsp;&nbsp;Boxman</a></li>
-        </ul>
-        <ul class="right">
-                    <li><a href="{% url 'home' %}">Browse Records</a></li>
+        </ul> -->
+        <!-- <ul class="right hide-on-med-and-down"> -->
+                  
                     {% if user.is_authenticated %}
-                    <li><a href="{% url 'index' %}">My Records</a></li>
-                    <li><a href="{% url 'record_create' %}">Add Record</a></li>
-                    <li><a href="{% url 'genres_create' %}">Add Genre</a></li>
-                    <li><a href="{% url 'genres_index' %}">View Genres</a></li>
-                    <li><a href="{% url 'logout' %}">Log Out</a></li>
+                    <a href="{% url 'home' %}" class="active">BoxMan</a>
+                    <a href="{% url 'index' %}">My Records</a>
+                    <a href="{% url 'record_create' %}">Add Record</a>
+                    <a href="{% url 'genres_create' %}">Add Genre</a>
+                    <a href="{% url 'genres_index' %}">View Genres</a>
+                      <!-- <input id='search' type="text" placeholder="Search..">
+                      <button id='search-btn' type="submit"><i class="fa fa-search"></i></button> -->
+                    <a id="log-out" href="{% url 'logout' %}">Log Out</a>
+                    <!-- <div id="search-container">
+                    <button id='search-btn' type="submit"><i class="fa fa-search"></i></button>
+                    <input id='search' type="text" placeholder="Search..">
+                  </div> -->
+                    
+                    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                      <i class="fa fa-bars"></i>
+                    </a>
                     {% else %}
-                    <li><a href="{% url 'login' %}">Log In</a></li>
-                    <li><a href="{% url 'signup' %}">Register</a></li>
+                    <a href="{% url 'home' %}" class="active">BoxMan</a>
+                    <a id='login' href="{% url 'login' %}">Log In</a>
+                    <a id='register' href="{% url 'signup' %}">Register</a>
+                    <!-- <div id="search-container">
+                   
+                    <input id='search' type="text" placeholder="Search..">
+                    <button id='search-btn' type="submit"><i class="fa fa-search"></i></button>
+                  </div> -->
+                    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                      <i class="fa fa-bars"></i>
+                    </a>
                     {% endif %}
-        </ul>
+        <!-- </ul> -->
       </div>
-    </nav>
-  </header>
+    <!-- </nav>
+  </header> -->
+
+    <!-- <nav> 
+      <ul id="slide-out" class="sidenav">
+        <li><div class="user-view">
+          <div class="background">
+            <img src="images/office.jpg">
+          </div>
+          <a href="#user"><img class="circle" src="images/yuna.jpg"></a>
+          <a href="#name"><span class="white-text name">John Doe</span></a>
+          <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
+        </div></li>
+        <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
+        <li><a href="#!">Second Link</a></li>
+        <li><div class="divider"></div></li>
+        <li><a class="subheader">Subheader</a></li>
+        <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+      </ul>
+      <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    </nav> -->
+    
+
+  
+  
 
   <main class="container">
     {% block content %}
     {% endblock %}
   </main>
+
+
   <footer class="page-footer">
     <div class="right">All Rights Reserved, &copy; 2022 Record 'Box-Man' Collector &nbsp;</div>
   </footer>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+ 
+  <script>
+
+     document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.sidenav');
+    var instances = M.Sidenav.init(elems, options);
+  });
+    $(document).ready(function() {
+      $('.sidenav').sidenav()
+      $('select').formSelect();
+      $('select').material_select();
+      $('datepicker').pickadate()
+      $('timepicker').pickatime()
+    })
+    $(document).ready(function(){
+    $('.tabs').tabs();
+  });
+
+  function myFunction() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+  
+  </script>
 </body>
 </html>
