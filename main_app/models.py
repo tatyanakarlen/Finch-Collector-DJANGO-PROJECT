@@ -9,6 +9,18 @@ SEGMENTS = (
     ('E', 'End')
 )
 
+RATINGS = (
+    (1, 1), 
+    (1.5, 1.5), 
+    (2, 2), 
+    (2.5, 2.5),
+    (3, 3), 
+    (3.5, 3.5), 
+    (4, 4), 
+    (4.5, 4.5), 
+    (5, 5)
+)
+
 # Create your models here.
 
 class Genre(models.Model):
@@ -19,8 +31,19 @@ class Genre(models.Model):
         return self.genre
 
     def get_absolute_url(self):
-        return reverse('genres_detail', kwargs={'pk': self.id})
+        return reverse('genres_detail', kwargs={'genre_id': self.id})
 
+
+class Rating(models.Model):
+    rating = models.IntegerField(
+        choices=RATINGS, 
+        default=RATINGS[0][0]
+    )
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    
+
+    def __str__(self):
+        return self.rating
   #------------------------------------------------------------------      
 
 
@@ -31,6 +54,7 @@ class Record(models.Model):
     year = models.IntegerField()
     description = models.TextField(max_length=250)
     genres = models.ManyToManyField(Genre) #creates join table 
+    ratings = models.ManyToManyField(Rating)
     user = models.ForeignKey(User, on_delete=models.CASCADE) #1 user has many posts
    
     def __str__(self):
@@ -65,7 +89,8 @@ class Track(models.Model):
 
 
 
-        # return self.airplay_set.filter(date=date.today()).count() >= 1
+
+
 
 #----------------------------------------------------    
 
