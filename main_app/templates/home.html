@@ -1,11 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="hero">
-    <h1>Welcome to record collector app!</h1>
+<div id='hero-container'>
+  <div class='row'>
+    
+  <div class="col s12 m8 l8">
+  <img class='image' src="https://imgur.com/mhKUenh.png">
   </div>
-  
-  <h1>Record List</h1>
+  <div class="col s12 m4 l4">
+    <img class='image' src="https://imgur.com/mhKUenh.png">
+    </div>
+    <div class="col s12 m4 l4">
+      <img id="bottom-img" class='image' src="https://imgur.com/mhKUenh.png">
+      </div>
+    </div>
+  </div>
+
   
   
   {%  for record in records %}

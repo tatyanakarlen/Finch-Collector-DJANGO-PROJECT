@@ -1,0 +1,22 @@
+/* #hero {
+    height: auto; 
+    overflow: hidden;
+} */
+
+.image {
+    width: 100%; 
+    /* height: auto;  */
+    
+}
+
+
+#bottom-img {
+    margin-top: 0.5rem; 
+}
+
+#hero-container {
+    width: 95%; 
+    height: 95%; 
+    border: 2px solid yellow; 
+    margin: 0 auto;
+}
