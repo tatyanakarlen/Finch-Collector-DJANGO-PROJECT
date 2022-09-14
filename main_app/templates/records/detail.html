@@ -25,6 +25,24 @@
 </div>
 </div>
 
+ <!-- Insert photo markup below this comment -->
+ {% for photo in record.photo_set.all %}
+ <img class="responsive-img card-panel" src="{{photo.url}}">
+{% empty %}
+ <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+{% endfor %}
+
+<form 
+enctype="multipart/form-data"
+method="POST" 
+action="{% url 'add_photo' record.id %}">
+{% csrf_token %}
+
+<input type="file" name="photo-file">
+<br><br>
+<input type="submit" value="Upload Photo plz">
+</form>
+
 <div class="card">
   <div class="card-content">
     <span class="tracks">Tracks</span>

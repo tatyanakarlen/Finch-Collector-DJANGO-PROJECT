@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect 
-from .models import Record, Genre, Review, User, Track
+from .models import Record, Genre, Review, User, Track, Photo
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic import ListView, DetailView
 from .forms import AirPlayForm, ReviewForm, ReviewEditForm, AddTrackForm
@@ -7,6 +7,9 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+import uuid
+import boto3
+from django.http import HttpResponse
 
 
 
@@ -71,6 +74,28 @@ class RecordUpdate(UpdateView):
   model = Record
   success_url = '/records/'
   fields = ['title', 'artist', 'label', 'year', 'description']
+
+
+
+S3_BASE_URL = "https://s3.us-east-2.amazonaws.com/"
+BUCKET = 'catcollector-tatyana-1984'
+
+def add_photo(request, record_id):
+  photo_file = request.FILES.get('photo-file', None)
+  if photo_file:
+    #store the file in s3
+    filename = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+    try:
+     s3 = boto3.client('s3')
+     s3.upload_fileobj(photo_file, BUCKET, filename)
+    #create a DB entry in photo table with url
+     url = f"{S3_BASE_URL}{BUCKET}/{filename}"
+     Photo.objects.create(url=url, record_id=record_id)
+     return redirect(f'/records/{record_id}')
+    except: 
+      return HttpResponse("something went wrong with uploading to amazon s3")
+  else:
+    return HttpResponse("no photos were received")
     
 
 def records_detail(request, record_id):

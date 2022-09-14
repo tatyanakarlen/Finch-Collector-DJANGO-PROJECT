@@ -27,6 +27,7 @@ urlpatterns = [
     path('records/<int:record_id>/reviews/edit/<int:review_id>', views.review_edit, name='review_edit'),
     path('records/<int:record_id>/reviews/submit_update_form/<int:review_id>', views.review_submit_edit, name='review_submit_edit'),
     path('records/<int:record_id>/tracks/', views.add_track, name='add_track'),
+    path('records/<int:record_id>/add_photo/', views.add_photo, name='add_photo'),
     ]
 
 
