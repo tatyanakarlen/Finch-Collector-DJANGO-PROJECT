@@ -32,6 +32,23 @@
     bottom: 8px;
     left: 16px;
     
+    
+}
+
+#sm-img-text1 {
+    position: absolute; 
+    color: white; 
+    bottom: 8px;
+    left: 16px; 
+   
+}
+
+#sm-img-text2 {
+    position: absolute; 
+    color: white; 
+    bottom: 8px;
+    left: 16px;  
+   
 }
     
 .img-container {

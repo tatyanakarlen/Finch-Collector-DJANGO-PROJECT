@@ -102,6 +102,26 @@
   margin: 0 auto; 
 }
 
+@media only screen and (max-width: 731px) {
+  #myTopnav-mobile{
+    display: block; 
+  }
+  #myTopnav {
+    display: none;
+  }
+}
+
+
+
+@media only screen and (min-width: 731px) {
+#myTopnav-mobile {
+    display: none;
+  }
+  #myTopnav {
+    display: block;
+  }
+}
+
 
 
 
