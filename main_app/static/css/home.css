@@ -1,7 +1,7 @@
 
 
 #bottom-img {
-  margin-top: 0.9rem;
+  margin-top: 1.275rem;
 }
 
 #hero-container {
@@ -35,6 +35,10 @@
 
 .row {
   margin-bottom: unset;
+}
+
+#hero-row {
+    max-height: 100%;
 }
 
 .img-wrapper {

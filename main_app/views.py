@@ -110,7 +110,7 @@ def records_detail(request, record_id):
   if record.user.id == request.user.id: 
     return render(request, 'records/detail.html', { 
     'record': record, 'airplay_form': airplay_form, 'review_form': review_form, 
-    'add_track_form': add_track_form, 'genres': genres, 'reviews': reviews, 'tracks': tracks
+    'add_track_form': add_track_form, 'genres': genres, 'reviews': reviews, 'tracks': tracks, 
 })
   else: 
     return render(request, 'records/public-detail.html', { 
